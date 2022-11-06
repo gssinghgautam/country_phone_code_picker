@@ -291,13 +291,13 @@ class CountryPhoneCodePicker extends StatelessWidget {
               border: Border.all(color: borderColor, width: borderWidth),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 showFlag == true
                     ? Container(
                         height: flagHeight,
                         width: flagWidth,
-                        padding: const EdgeInsets.only(right: 4.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(flagBorderRadius),
                           image: DecorationImage(
@@ -309,6 +309,7 @@ class CountryPhoneCodePicker extends StatelessWidget {
                         ),
                       )
                     : const SizedBox(),
+                const SizedBox(width: 8.0,),
                 showName == true
                     ? Expanded(
                         child: Text(
