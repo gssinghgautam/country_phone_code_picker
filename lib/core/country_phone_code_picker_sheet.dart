@@ -14,6 +14,7 @@ class CountryPhoneCodePickerModalSheet extends StatelessWidget {
     required this.searchBarLeadingIcon,
     required this.searchBarHintText,
     required this.searchBarHintStyle,
+    required this.countryTextStyle,
     required this.searchBarLabelText,
     required this.searchBarLabelStyle,
     required this.searchBarHelperText,
@@ -52,6 +53,8 @@ class CountryPhoneCodePickerModalSheet extends StatelessWidget {
 
   //styling for hint text
   TextStyle searchBarHintStyle;
+
+  TextStyle countryTextStyle;
 
   //label text for search bar
   String? searchBarLabelText;
@@ -206,9 +209,11 @@ class CountryPhoneCodePickerModalSheet extends StatelessWidget {
                     title: Text(
                       controller.filteredCountries[index].name,
                       overflow: TextOverflow.ellipsis,
+                      style: countryTextStyle,
                     ),
                     trailing: Text(
                       controller.filteredCountries[index].phoneCode,
+                      style: countryTextStyle,
                     ),
                   );
                 },

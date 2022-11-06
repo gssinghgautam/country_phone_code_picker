@@ -43,6 +43,7 @@ class CountryPhoneCodePicker extends StatelessWidget {
     this.searchBarHelperStyle = const TextStyle(),
     this.searchBarPrefixText,
     this.searchBarPrefixStyle = const TextStyle(),
+    this.countryTextStyle = const TextStyle(),
     this.searchBarPrefixIcon = const Icon(Icons.search, color: Colors.black),
     this.searchBarContentPadding =
         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -96,6 +97,7 @@ class CountryPhoneCodePicker extends StatelessWidget {
     this.searchBarHelperStyle = const TextStyle(),
     this.searchBarPrefixText,
     this.searchBarPrefixStyle = const TextStyle(),
+    this.countryTextStyle = const TextStyle(),
     this.searchBarPrefixIcon = const Icon(Icons.search, color: Colors.black),
     this.searchBarContentPadding =
         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -182,6 +184,8 @@ class CountryPhoneCodePicker extends StatelessWidget {
   //styling for hint text
   TextStyle searchBarHintStyle;
 
+  TextStyle countryTextStyle;
+
   //label text for search bar
   String? searchBarLabelText;
 
@@ -262,6 +266,7 @@ class CountryPhoneCodePicker extends StatelessWidget {
               searchBarHintStyle: searchBarHintStyle,
               searchBarLabelText: searchBarLabelText,
               searchBarLabelStyle: searchBarLabelStyle,
+              countryTextStyle: countryTextStyle,
               searchBarHelperText: searchBarHelperText,
               searchBarHelperStyle: searchBarHelperStyle,
               searchBarPrefixText: searchBarPrefixText,
