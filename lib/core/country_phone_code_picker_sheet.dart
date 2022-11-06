@@ -182,7 +182,7 @@ class CountryPhoneCodePickerModalSheet extends StatelessWidget {
           ),
           body: GetBuilder<SearchController>(
             builder: (controller) {
-              return ListView.builder(
+              return ListView.separated(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 itemCount: controller.filteredCountries.length,
                 itemBuilder: (context, index) {
@@ -216,6 +216,9 @@ class CountryPhoneCodePickerModalSheet extends StatelessWidget {
                       style: countryTextStyle,
                     ),
                   );
+                },
+                separatorBuilder: (context, index){
+                  return const Divider(color: Color(0xFF9FA7C4), height: 1.0, thickness: 0.5,);
                 },
               );
             },
