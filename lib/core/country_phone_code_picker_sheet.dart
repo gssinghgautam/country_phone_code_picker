@@ -178,43 +178,30 @@ class CountryPhoneCodePickerModalSheet extends StatelessWidget {
                   return ListView.builder(
                     itemCount: controller.filteredCountries.length,
                     itemBuilder: (context, index) {
-                      return InkWell(
+                      return ListTile(
                         onTap: () {
                           countryController.updateSelectedCountry(
                               controller.filteredCountries[index]);
                           searchController.updateQueryList('');
                           Navigator.pop(context);
                         },
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 2),
-                          height: 30,
-                          width: double.infinity,
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 25,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(countryFlagApi +
-                                        controller
-                                            .filteredCountries[index].code),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              Expanded(
-                                child: Text(
-                                  controller.filteredCountries[index].name,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                controller.filteredCountries[index].phoneCode,
-                              ),
-                            ],
+                        leading: Container(
+                          height: 25,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(countryFlagApi +
+                                  controller
+                                      .filteredCountries[index].code),
+                            ),
                           ),
+                        ),
+                        title: Text(
+                          controller.filteredCountries[index].name,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        trailing: Text(
+                          controller.filteredCountries[index].phoneCode,
                         ),
                       );
                     },
