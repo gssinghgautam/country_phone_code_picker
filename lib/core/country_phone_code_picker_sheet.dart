@@ -9,6 +9,7 @@ import 'package:country_phone_code_picker/controller/country_controller.dart';
 class CountryPhoneCodePickerModalSheet extends StatelessWidget {
   // ignore: use_key_in_widget_constructors
   CountryPhoneCodePickerModalSheet({
+    required this.searchSheetBackgroundWidget,
     required this.searchSheetBackground,
     required this.searchBarLeadingIcon,
     required this.searchBarHintText,
@@ -38,6 +39,8 @@ class CountryPhoneCodePickerModalSheet extends StatelessWidget {
 
   TextEditingController? searchBarInput;
 
+  // Background widget
+  Widget searchSheetBackgroundWidget;
   //color of the background of the sheet
   Color searchSheetBackground;
 
@@ -118,100 +121,102 @@ class CountryPhoneCodePickerModalSheet extends StatelessWidget {
     searchBarInput = TextEditingController(text: searchBarInitialValue);
     SearchController searchController = Get.put(SearchController());
     CountryController countryController = Get.find<CountryController>();
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: searchSheetBackground,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: searchBarLeadingIcon,
-        ),
-      ),
-      body: Container(
-        color: searchSheetBackground,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          children: [
-            TextFormField(
-              controller: searchBarInput,
-              onChanged: (query) {
-                searchController.updateQueryList(query);
+    return Stack(
+      children: [
+        searchSheetBackgroundWidget,
+        Scaffold(
+          backgroundColor: searchSheetBackground,
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: searchSheetBackground,
+            elevation: 1.0,
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
               },
-              decoration: InputDecoration(
-                hintText: searchBarHintText,
-                hintStyle: searchBarHintStyle,
-                labelText: searchBarLabelText,
-                labelStyle: searchBarLabelStyle,
-                helperText: searchBarHelperText,
-                helperStyle: searchBarHelperStyle,
-                prefixText: searchBarPrefixText,
-                prefixStyle: searchBarPrefixStyle,
-                prefixIcon: searchBarPrefixIcon,
-                suffix: IconButton(
-                  onPressed: () {
-                    searchBarInput!.clear();
-                    searchController.updateQueryList('');
-                  },
-                  icon: const Icon(Icons.cancel_rounded, color: Colors.black),
-                ),
-                contentPadding: searchBarContentPadding,
-                border: border,
-                errorBorder: errorBorder,
-                enabledBorder: enabledBorder,
-                focusedBorder: focusedBorder,
-                disabledBorder: disabledBorder,
-                focusedErrorBorder: focusedErrorBorder,
-              ),
-              cursorColor: searchBarCursorColor,
-              cursorHeight: searchBarCursorHeight,
-              cursorWidth: searchBarCursorWidth,
-              style: style,
-              keyboardType: keyboardType,
-              showCursor: showCursor,
+              icon: searchBarLeadingIcon,
             ),
-            Expanded(
-              child: GetBuilder<SearchController>(
-                builder: (controller) {
-                  return ListView.builder(
-                    itemCount: controller.filteredCountries.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        onTap: () {
-                          countryController.updateSelectedCountry(
-                              controller.filteredCountries[index]);
-                          searchController.updateQueryList('');
-                          Navigator.pop(context);
-                        },
-                        leading: Container(
-                          height: 25,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(countryFlagApi +
-                                  controller
-                                      .filteredCountries[index].code),
-                            ),
-                          ),
-                        ),
-                        title: Text(
-                          controller.filteredCountries[index].name,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        trailing: Text(
-                          controller.filteredCountries[index].phoneCode,
-                        ),
-                      );
+            title: Container(
+              alignment: Alignment.center,
+              height: 30.0,
+              child: TextField(
+                controller: searchBarInput,
+                onChanged: (query) {
+                  searchController.updateQueryList(query);
+                },
+                decoration: InputDecoration(
+                  hintText: searchBarHintText,
+                  hintStyle: searchBarHintStyle,
+                  labelText: searchBarLabelText,
+                  labelStyle: searchBarLabelStyle,
+                  helperText: searchBarHelperText,
+                  helperStyle: searchBarHelperStyle,
+                  prefixText: searchBarPrefixText,
+                  prefixStyle: searchBarPrefixStyle,
+                  suffix: IconButton(
+                    onPressed: () {
+                      searchBarInput!.clear();
+                      searchController.updateQueryList('');
                     },
+                    icon: const Icon(Icons.cancel_rounded, color: Colors.black),
+                  ),
+                  contentPadding: searchBarContentPadding,
+                  border: border,
+                  errorBorder: errorBorder,
+                  enabledBorder: enabledBorder,
+                  focusedBorder: focusedBorder,
+                  disabledBorder: disabledBorder,
+                  focusedErrorBorder: focusedErrorBorder,
+                ),
+                cursorColor: searchBarCursorColor,
+                cursorHeight: searchBarCursorHeight,
+                cursorWidth: searchBarCursorWidth,
+                style: style,
+                keyboardType: keyboardType,
+                showCursor: showCursor,
+              ),
+            ),
+          ),
+          body: GetBuilder<SearchController>(
+            builder: (controller) {
+              return ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                itemCount: controller.filteredCountries.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    onTap: () {
+                      countryController.updateSelectedCountry(
+                          controller.filteredCountries[index]);
+                      searchController.updateQueryList('');
+                      Navigator.pop(context);
+                    },
+                    leading: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(countryFlagApi +
+                              controller.filteredCountries[index].code),
+                        ),
+                      ),
+                    ),
+                    title: Text(
+                      controller.filteredCountries[index].name,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    trailing: Text(
+                      controller.filteredCountries[index].phoneCode,
+                    ),
                   );
                 },
-              ),
-            ),
-          ],
-        ),
-      ),
+              );
+            },
+          ),
+        )
+      ],
     );
   }
 }

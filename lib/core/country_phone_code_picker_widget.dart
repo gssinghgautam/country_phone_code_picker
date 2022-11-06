@@ -31,6 +31,7 @@ class CountryPhoneCodePicker extends StatelessWidget {
     this.showName = false,
     this.showPhoneCode = false,
     this.actionIcon = const Icon(Icons.arrow_drop_down_rounded),
+    required this.searchSheetBackgroundWidget,
     this.searchSheetBackground = const Color(0xfffafafa),
     this.searchBarLeadingIcon =
         const Icon(Icons.arrow_back_outlined, color: Colors.black),
@@ -83,6 +84,7 @@ class CountryPhoneCodePicker extends StatelessWidget {
     this.showName = false,
     this.showPhoneCode = false,
     this.actionIcon = const Icon(Icons.arrow_drop_down_rounded),
+    required this.searchSheetBackgroundWidget,
     this.searchSheetBackground = const Color(0xfffafafa),
     this.searchBarLeadingIcon =
         const Icon(Icons.arrow_back_outlined, color: Colors.black),
@@ -164,6 +166,9 @@ class CountryPhoneCodePicker extends StatelessWidget {
   final Widget actionIcon;
 
   //-------------------------------------------------------------------------------------------------
+
+  //Search background widget
+  Widget searchSheetBackgroundWidget;
 
   //color of the background of the sheet
   Color searchSheetBackground;
@@ -250,6 +255,7 @@ class CountryPhoneCodePicker extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute<void>(
             builder: (BuildContext context) => CountryPhoneCodePickerModalSheet(
+              searchSheetBackgroundWidget: searchSheetBackgroundWidget,
               searchSheetBackground: searchSheetBackground,
               searchBarLeadingIcon: searchBarLeadingIcon,
               searchBarHintText: searchBarHintText,

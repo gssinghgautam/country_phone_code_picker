@@ -44,6 +44,7 @@ class MyHomePage extends StatelessWidget {
                 flagWidth: 30,
                 borderColor: Colors.grey,
                 style: const TextStyle(fontSize: 16),
+                searchSheetBackgroundWidget: Container(),
                 searchBarHintText: 'Search by name',
               ),
               const SizedBox(height: 10),
